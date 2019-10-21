@@ -4,14 +4,22 @@ import Stock from '../components/Stock'
 class PortfolioContainer extends Component {
 
   render() {
-    return (
-      <div>
-        <h2>My Portfolio</h2>
-          {
-            //render your portfolio stocks here
-          }
-      </div>
-    );
+    if (this.props.stocks.length === 0) {
+      return (
+        <div>
+          <h2>Portfolio</h2>
+          <p>Your portfolio is currently empty.</p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h2>Portfolio</h2>
+          {this.props.stocks.map(stock =>
+            <Stock stock={stock} key={stock.id} onClick={() => this.props.removeStock(stock)}/>)}
+        </div>
+      );
+    }
   }
 
 }
